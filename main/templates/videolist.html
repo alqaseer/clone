@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+{% for video in videos %}
+<a href='/video/{{video.pk}}'><div class='row listitem'>
+	<div class='col-md-4'>
+		<span class='glyphicon glyphicon-eye-open'></span> <span class='videocount'>{{ video.count }}</span>
+	</div>
+	<div class='col-md-8'>
+		<h2> {{video.title}} </h2>
+	</div>
+
+</div>
+</a>
+<video id="my-video" class="video-js vjs-big-play-centered embed-responsive-item" controls preload="auto" width="auto" height="auto" poster="" data-setup="{}">
+				    <source src="/media/video.mp4" type='video/mp4'>
+				    <source src="MY_VIDEO.webm" type='video/webm'>
+				    <p class="vjs-no-js">
+				    To view this video please enable JavaScript, and consider upgrading to a web browser that
+				    <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+				    </p>
+				</video>
+
+  <script src="http://vjs.zencdn.net/5.8.8/video.js"></script>
+{% endfor %}
+
+{% endblock %}

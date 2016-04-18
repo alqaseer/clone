@@ -1,11 +1,7 @@
-{% load staticfiles %}
-<!DOCTYPE html>
-<html>
-<head>
+{% extends 'base.html' %}
 	
-</head>
-<body>
-	
+
+{% block body %}	
 	<form action='/upload/' method='POST' enctype="multipart/form-data">
 	{% csrf_token %}
 	{{ form.as_p }}
@@ -13,6 +9,4 @@
 	</form>
 
 
-
-</body>
-</html>
+{% endblock %}

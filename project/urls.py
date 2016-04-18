@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^convert/$', 'main.views.convert'),
     url(r'^upload/$', 'main.views.upload'),
     url(r'^video/(?P<pk>[0-9]+)/$', 'main.views.displayvideo'),
+    url(r'^delete/(?P<pk>[0-9]+)/$', 'main.views.deletevid'),
     url(r'^myvideos/$', 'main.views.myvideos'),
 
     #user managment below

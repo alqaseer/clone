@@ -8,9 +8,10 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 class Video(models.Model):
 	title = models.CharField(max_length=255)
 	count = models.IntegerField(default=0, blank=True, null=True)
-	file = models.FileField(upload_to='uploads/')
+	file = models.FileField(upload_to='uploads/pre/')
 	stamp = models.CharField(max_length=255, blank=True, null=True)
 	user = models.ForeignKey('main.CustomUser')
+	done = models.BooleanField(default=False)
 
 
 class CustomUserManager(BaseUserManager):

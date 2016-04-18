@@ -20,6 +20,9 @@ import os
 
 import subprocess as sp
 FFMPEG_BIN = "ffmpeg" 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
 
 def myvideos(request):
     context = {}
@@ -76,26 +79,32 @@ def upload(request):
                 
                 
                 savedvid = Video.objects.get(stamp=timestring)
+                namenoext = '%s' % savedvid.file
+                ext = namenoext[len(namenoext)-3:len(namenoext)]
+                os.rename('%s/media/%s' % (BASE_DIR,savedvid.file) ,'%s/media/uploads/pre/%s.%s' % (BASE_DIR,timestring,ext))
+                savedvid.file = "uploads/done/%s.mp4" % timestring
+                savedvid.save()
 
-                # vid_check = str(video.file[len(video.file)-3:len(video.file)])
+                # # vid_check = str(video.file[len(video.file)-3:len(video.file)])
 
-                file_string = "%s" % video.file
+                # file_string = "%s" % video.file
 
-                filename, file_extension = os.path.splitext(file_string)
+                # filename, file_extension = os.path.splitext(file_string)
 
-                print '------'
-                print 'file string:: %s' % file_extension
-                print '------'
-                print 'file extension %s' % file_extension
+                # print '------'
+                # print 'file string:: %s' % file_extension
+                # print '------'
+                # print 'file extension %s' % file_extension
 
-                if not file_extension == '.mp4':
-                    command = [ FFMPEG_BIN,
-                                '-i', 'media/%s' % video.file,
-                                'media/uploads/%s.mp4' % video.stamp]
-                    pipe = sp.Popen(command, stdout = sp.PIPE, bufsize=10**8)
+                # if not file_extension == '.mp4':
+                #     subprocess.call(['ffmpeg', '-i', 'media/%s' % video.file, 'media/uploads/%s.mp4' % video.stamp])
+                #     # command = [ FFMPEG_BIN,
+                #     #             '-i', 'media/%s' % video.file,
+                #     #             'media/uploads/%s.mp4' % video.stamp]
+                #     # pipe = sp.Popen(command, stdout = sp.PIPE, bufsize=10**8)
                     
-                    savedvid.file = "uploads/%s.mp4" % timestring
-                    savedvid.save()
+                #     savedvid.file = "uploads/%s.mp4" % timestring
+                #     savedvid.save()
 
 
                 return redirect('/myvideos/')

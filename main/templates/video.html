@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block body %}
+{% if video.done == True %}
 <div class="row">
 	<div class="col-xs-12">
 		<div class='embed-responsive embed-responsive-16by9'>
@@ -28,6 +29,10 @@
 	</div>
 </div>
 
+{% else %}
+<h1>video is being processed</h1>
+
+{% endif %}
 
   <!-- <script src="http://vjs.zencdn.net/5.8.8/video.js"></script> -->
 
